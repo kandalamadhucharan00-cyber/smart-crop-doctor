@@ -1,0 +1,5 @@
+Timestamp,Disease Detected,Confidence (%),Severity
+2026-03-28 22:21:07,Healthy,0.0,None
+2026-03-28 22:22:32,Healthy,0.0,None
+2026-03-28 22:28:44,leaf_rust,75.62,Low
+2026-03-29 10:00:47,Leaf Rust,78.18,Medium
