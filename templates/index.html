@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Crop Doctor 🌾</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <!-- Animated background accents -->
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+    <div class="bg-shape shape-3"></div>
+    
+    <div class="app-wrapper">
+        <header class="glass-header">
+            <div class="logo">
+                <h1>Smart Crop Doctor <span>🌾</span></h1>
+                <p>AI-Powered Plant Health Diagnostics</p>
+            </div>
+            <nav class="tabs">
+                <button class="tab-btn active" data-target="upload-view">Upload Image</button>
+                <button class="tab-btn" data-target="camera-view">Live Camera</button>
+                <button class="tab-btn" data-target="history-view">History</button>
+                <div class="lang-selector" style="margin-left: 15px; display: inline-flex; align-items: center;">
+                    <select id="language-select" style="padding: 5px 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.1); color: #fff; outline: none; font-family: inherit; cursor: pointer;">
+                        <option value="en" style="color: #333;">English</option>
+                        <option value="te" style="color: #333;">తెలుగు</option>
+                        <option value="kn" style="color: #333;">ಕನ್ನಡ</option>
+                    </select>
+                </div>
+            </nav>
+        </header>
+
+        <main class="content-area">
+            
+            <!-- Upload View -->
+            <section id="upload-view" class="view-section active custom-scroll">
+                <div class="upload-container glass-panel">
+                    <div class="drag-drop-zone" id="drop-zone">
+                        <div class="upload-icon">📁</div>
+                        <h3>Upload Leaf Image</h3>
+                        <p>Drag and drop or click to browse</p>
+                        <input type="file" id="file-input" accept="image/*" hidden>
+                        <button class="btn btn-primary" id="browse-btn">Select File</button>
+                    </div>
+                </div>
+
+                <!-- Results Panel (Hidden by default) -->
+                <div id="results-panel" class="results-container glass-panel hidden">
+                    <div class="result-layout">
+                        <div class="image-box">
+                            <img id="result-img" src="" alt="Processed Image">
+                            <div class="scanning-line"></div>
+                        </div>
+                        <div class="info-box">
+                            <h2>Analysis Results</h2>
+                            <div class="metric-grid">
+                                <div class="metric-card">
+                                    <span class="label">Condition</span>
+                                    <span class="value" id="val-disease">Processing...</span>
+                                </div>
+                                <div class="metric-card">
+                                    <span class="label">Confidence</span>
+                                    <div class="progress-bar">
+                                        <div class="progress" id="conf-progress" style="width: 0%"></div>
+                                    </div>
+                                    <span class="value sub-val" id="val-conf">0%</span>
+                                </div>
+                                <div class="metric-card">
+                                    <span class="label">Severity</span>
+                                    <span class="badge" id="val-severity">Processing...</span>
+                                </div>
+                            </div>
+                            
+                            <div class="recommendation-card" style="margin-bottom: 15px;">
+                                <h3><span class="icon">ℹ️</span> <span id="label-desc">Description</span></h3>
+                                <p id="val-description">Awaiting analysis...</p>
+                            </div>
+                            
+                            <div class="recommendation-card">
+                                <h3><span class="icon">💡</span> <span id="label-treat">Treatment Plan</span></h3>
+                                <p id="val-recommendation">Awaiting analysis...</p>
+                            </div>
+                            
+                            <button class="btn btn-outline" id="reset-btn">Analyze Another Image</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Camera View -->
+            <section id="camera-view" class="view-section hidden">
+                <div class="camera-container glass-panel">
+                    <div class="camera-header">
+                        <h2>Real-Time Diagnostics Stream</h2>
+                        <p>Start the feed and present the leaf to your webcam.</p>
+                    </div>
+                    <div class="video-wrapper">
+                        <!-- We load the image source when the tab is active to avoid keeping the webcam on -->
+                        <img id="video-stream" src="" alt="Live Video Feed" />
+                        <div class="overlay-corners"></div>
+                    </div>
+                    <button class="btn btn-primary mt-4" id="toggle-camera-btn">Start Camera</button>
+                </div>
+            </section>
+
+            <!-- History View -->
+            <section id="history-view" class="view-section hidden custom-scroll">
+                <div class="history-container glass-panel">
+                    <div class="header-action">
+                        <h2>Recent Scans</h2>
+                        <a href="/download_report" class="btn btn-outline" download>Download CSV</a>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Date & Time</th>
+                                    <th>Disease Model Output</th>
+                                    <th>Confidence</th>
+                                    <th>Assessed Severity</th>
+                                </tr>
+                            </thead>
+                            <tbody id="history-tbody">
+                                <!-- Populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>

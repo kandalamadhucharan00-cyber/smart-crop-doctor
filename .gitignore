@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env/
+env/
+.venv/
+history.csv
+
+# Models (yolov8n.pt is ~6.5MB so it can be pushed, but usually ignore large ones)
+# We won't ignore yolov8n.pt so it works out of the box when cloned.
+
+# Mac/Windows system files
+.DS_Store
+Thumbs.db
